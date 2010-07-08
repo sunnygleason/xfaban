@@ -62,8 +62,8 @@ import java.util.regex.Pattern;
 public class SunHttpTransport extends HttpTransport {
 
     /* Default headers used for POST request */
-    private static Map<String, String> postHeadersForm;
-    private static Map<String, String> postHeadersBinary;
+    protected static Map<String, String> postHeadersForm;
+    protected static Map<String, String> postHeadersBinary;
 
     static {
         URL.setURLStreamHandlerFactory(new URLStreamHandlerFactory());
@@ -78,10 +78,10 @@ public class SunHttpTransport extends HttpTransport {
     private StringBuilder charBuffer;
 
     /** The response code of the last response. */
-    private int responseCode;
+    protected int responseCode;
 
     /** The response headers of the last response. */
-    private Map<String, List<String>> responseHeader;
+    protected Map<String, List<String>> responseHeader;
 
     /** The content size of the last read page. */
     private int contentSize;
@@ -290,7 +290,7 @@ public class SunHttpTransport extends HttpTransport {
         return readURL(new URL(url), postRequest, null);
     }
 
-    private HttpURLConnection getConnection(URL url) throws IOException {
+    protected HttpURLConnection getConnection(URL url) throws IOException {
         HttpURLConnection c = (HttpURLConnection) url.openConnection();
         c.setInstanceFollowRedirects(followRedirects);
         return c;
@@ -302,7 +302,7 @@ public class SunHttpTransport extends HttpTransport {
      * @param c The connection
      * @param headers The request headers
      */
-    private void setHeaders(URLConnection c, Map<String, String> headers) {
+    protected void setHeaders(URLConnection c, Map<String, String> headers) {
         if (headers == null) {
             c.setRequestProperty("Accept-Language", "en-us,en;q=0.5");
             return;
@@ -658,7 +658,7 @@ public class SunHttpTransport extends HttpTransport {
      * @return The number of bytes read
      * @throws IOException
      */
-    private int readResponse(HttpURLConnection connection) throws IOException {
+    protected int readResponse(HttpURLConnection connection) throws IOException {
         InputStream is = connection.getInputStream();
         /*
         Map<String, List<String>> m = connection.getHeaderFields();
@@ -952,7 +952,7 @@ public class SunHttpTransport extends HttpTransport {
         return responseCode;
     }
 
-	private void checkContentType(Map<String, String> headers) throws IOException {
+	protected void checkContentType(Map<String, String> headers) throws IOException {
 		String type = headers.get("Content-type");
 		if (type == null)
 			type = headers.get("Content-Type");
