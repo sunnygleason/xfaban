@@ -256,7 +256,7 @@ public class BenchmarkDefinition implements Serializable, Cloneable {
         }
     }
 
-    private static void getBackground(Class<?> driverClass, Driver driver)
+    protected static void getBackground(Class<?> driverClass, Driver driver)
             throws DefinitionException {
         if (!driverClass.isAnnotationPresent(Background.class)) {
             driver.mix[1] = null;
@@ -297,7 +297,7 @@ public class BenchmarkDefinition implements Serializable, Cloneable {
                 getInitialDelay(background.initialDelay().max());
     }
 
-    private static Cycle getInitialDelay(Class<?> driverClass) {
+    protected static Cycle getInitialDelay(Class<?> driverClass) {
         InitialDelay initDelay = driverClass.getAnnotation(
                 InitialDelay.class);
         int max;
@@ -326,7 +326,7 @@ public class BenchmarkDefinition implements Serializable, Cloneable {
         return delay;
     }
 
-    private BenchmarkDefinition() {
+    protected BenchmarkDefinition() {
     	super();
     }
 

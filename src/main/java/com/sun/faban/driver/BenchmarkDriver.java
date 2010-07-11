@@ -26,12 +26,15 @@ package com.sun.faban.driver;
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;
 
+import com.google.inject.BindingAnnotation;
+
 /**
  * This annotation interface describes the parameters
  * required when defining a benchmark driver.
  */
 @Documented
 @Inherited
+@BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface BenchmarkDriver {

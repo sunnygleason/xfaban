@@ -36,7 +36,11 @@ import java.util.logging.Level;
  * @author Akara Sucharitakul
  */
 public class TimeThread extends AgentThread {
-
+    Object getDriverInstance() throws Exception {
+        return GuiceContext.isGuiceEnabled() ?
+                GuiceContext.getDriverInstance() : driverClass.newInstance();
+    }
+    
     /**
      * Allocates and initializes the timing structures which is specific
      * to the pseudo-thread dimensions.
@@ -70,7 +74,7 @@ public class TimeThread extends AgentThread {
         driverContext = new DriverContext(this, timer);
 
         try {
-            driver = driverClass.newInstance();
+            driver = getDriverInstance();
         } catch (Throwable t) {
             Throwable cause = t.getCause();
             while (cause != null) {

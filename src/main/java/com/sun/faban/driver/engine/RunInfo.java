@@ -146,7 +146,7 @@ public class RunInfo implements Serializable {
     /** The log handler. */
     public transient Handler logHandler;
 
-    private RunInfo() {
+    protected RunInfo() {
     	super();
     }
 

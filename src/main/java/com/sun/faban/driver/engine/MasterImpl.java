@@ -119,9 +119,9 @@ public class MasterImpl extends UnicastRemoteObject implements Master {
             "des exportations et la liste de ressortissants sp\351cifiquement " +
             "d\351sign\351s, sont rigoureusement interdites.\n";
 
-    private String className = getClass().getName();
+    protected String className = getClass().getName();
 
-    private Logger logger = Logger.getLogger(className);
+    protected Logger logger = Logger.getLogger(className);
 
     BenchmarkDefinition benchDef;
 
@@ -144,7 +144,7 @@ public class MasterImpl extends UnicastRemoteObject implements Master {
     /** Convenience accessor to the file separator. */
     protected static String fs = System.getProperty("file.separator");
 
-    private boolean runAborted = false;
+    protected boolean runAborted = false;
 
     /** The lock object for the state. */
     protected final Object stateLock = new Object();
@@ -363,7 +363,7 @@ public class MasterImpl extends UnicastRemoteObject implements Master {
         return Integer.toString(runID);
     }
 
-    private void configureLogger(String dir) {
+    protected void configureLogger(String dir) {
 
         logger = Logger.getLogger("com.sun.faban.driver");
         FileHandler handler = null;
@@ -538,7 +538,7 @@ public class MasterImpl extends UnicastRemoteObject implements Master {
      * @param driverType The driver type id to configure
      * @throws Exception If anything goes wrong in the process
      */
-    private void configureAgents(int driverType) throws Exception {
+    protected void configureAgents(int driverType) throws Exception {
 
         int agentCnt = runInfo.driverConfigs[driverType].numAgents;
         if (agentCnt > 0) {
@@ -592,7 +592,7 @@ public class MasterImpl extends UnicastRemoteObject implements Master {
      * @param driverType The type id of the driver
      * @throws Exception An error occurred starting the driver threads
      */
-    private void startThreads(int driverType) throws Exception {
+    protected void startThreads(int driverType) throws Exception {
         int agentCnt = runInfo.driverConfigs[driverType].numAgents;
         if (agentCnt > 0) {
             Agent[] refs = agentRefs[driverType];
@@ -609,7 +609,7 @@ public class MasterImpl extends UnicastRemoteObject implements Master {
      * all the agents to start.
      * @throws Exception Anything that could go wrong during the run
      */
-    private void executeRun() throws Exception {
+    protected void executeRun() throws Exception {
 
         // Now wait for all threads to start if it is parallel.
         if (runInfo.parallelAgentThreadStart) {
